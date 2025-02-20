@@ -1,0 +1,49 @@
+
+
+.header {
+    width:100%;
+    padding: 10px;
+    border-bottom: 1px solid rgb(200, 200, 198);
+    margin:0;
+    box-sizing: border-box;
+    
+  }
+
+  .header-content{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width:70%;
+    max-width: 840px; 
+    margin: 0;
+    padding:0 20px
+  } 
+  
+  h1 {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: rgb(86, 69, 69);
+    font-weight: 600;
+    margin: 0;
+    left:0
+   
+  }
+  
+  .icon {
+    color: yellow;
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 28px;
+  }
+  
+  input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    max-width: 300px; 
+    /* margin-left: 25px;  */
+   
+   
+  }
