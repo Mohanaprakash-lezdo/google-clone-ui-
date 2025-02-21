@@ -1,317 +1,317 @@
 .note{
-    background: rgb(248, 248, 183);
-    border-radius: 10px;
-    margin:16px;    
-    padding:10px;
-    width:200px;
-    min-height: 250px;
-    box-shadow: 0 5px 5px rgb(203, 187, 187);
-    color:black;
-    position: relative; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
+  background: rgb(248, 248, 183);
+  border-radius: 10px;
+  margin:16px;    
+  padding:10px;
+  width:200px;
+  min-height: 250px;
+  box-shadow: 0 5px 5px rgb(203, 187, 187);
+  color:black;
+  position: relative; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 }
 
 
 /* highlight the pinned notes */
 .pinned{
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 
 
 .note-image{
-    width:100%;
-    height: 120px;
-    border-radius: 5px;
-    margin-bottom: 8px;
-    object-fit: cover;
-    display: block;
-    padding-right:15px ;
-    padding-left: 15px;
-    background: transparent;
+  width:100%;
+  height: 120px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  object-fit: cover;
+  display: block;
+  padding-right:15px ;
+  padding-left: 15px;
+  background: transparent;
 }
 
 .note-content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    flex-grow: 1;
-    padding: 5px;
-    width: 100%;
-    min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  padding: 5px;
+  width: 100%;
+  min-height: 120px;
 }
 
 
 .note h2{
-    font-size: 1.1em;
-    margin-bottom: 6px;
-   
+  font-size: 1.1em;
+  margin-bottom: 6px;
+ 
 }
 
 /* No image */
 /* .note .note.no-image{
-    min-height: 100p;
+  min-height: 100p;
 } */
 
 .note span{
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-   
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+ 
 }
 
 .note.no-image{
-    min-height: 60px;
-    max-height: auto;
+  min-height: 60px;
+  max-height: auto;
 }
 
 /* Icons visibility */
 .icons{
-    opacity:0;
-    visibility: hidden;
-    position: absolute;
-    width:100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;  
+  opacity:0;
+  visibility: hidden;
+  position: absolute;
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;  
 
 }
 
 
 .note:hover .icons{
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 } 
 
 
 
 .pin-icon{
-    position:relative;
-    top:-12px;
-    right: -160px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
+  position:relative;
+  top:-12px;
+  right: -160px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
 
 .more-options{
-    position: relative;
-    bottom: -204px;
-    right: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
+  position: relative;
+  bottom: -204px;
+  right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
 
 
 /* drop down menu */
 .menu{
-    position: absolute;
-    top:117px; 
-    right:15px;
-    background:white;
-    box-shadow: 0px 2px  8px rgba(0,0,0,0.2);
-    padding:5px 10px;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap:5px;
-    min-width: 120px;
-    z-index:10  ;
-    /* ensures menu appears above content */
+  position: absolute;
+  top:117px; 
+  right:15px;
+  background:white;
+  box-shadow: 0px 2px  8px rgba(0,0,0,0.2);
+  padding:5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap:5px;
+  min-width: 120px;
+  z-index:10  ;
+  /* ensures menu appears above content */
 }
 
 
 .menu button{
-    padding: 5px;
-    cursor: pointer;
-    background: none;
-    border:none;
-    text-align: center;
-    width:100%;
-    font-size:14px;
-    outline: none;
+  padding: 5px;
+  cursor: pointer;
+  background: none;
+  border:none;
+  text-align: center;
+  width:100%;
+  font-size:14px;
+  outline: none;
 }
 
 .menu button:hover{
-    background-color: rgb(235,235,235);
+  background-color: rgb(235,235,235);
 }
 
 .modal-overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100%;
-    background:rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background:rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 /* Modal Content */
 .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
-    /* height: 40%; */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  /* height: 40%; */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 
-  /* image width in modal */
-  .modal-image{
-    width:auto;
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  /* pin &More options inside modal */
- 
-  /* Modal Icons */
-   .modal-icons {
-    position: absolute;
-    top:5px;    
-    right:5px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
+/* image width in modal */
+.modal-image{
+  width:auto;
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* pin &More options inside modal */
+
+/* Modal Icons */
+ .modal-icons {
+  position: absolute;
+  top:5px;    
+  right:5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.modal-pin-icon ,.modal-more-options {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+
+.modal-menu {
+  position: absolute;
+  top:35px;
+  right:0;
+  background: white;
+  padding:5px 10px;
+  border-radius: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap:5px;
+  min-width: 120px;
+  z-index:1100;
+  border: none;
+  outline: none;
   
-  .modal-pin-icon ,.modal-more-options {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
- 
+}
 
-  .modal-menu {
-    position: absolute;
-    top:35px;
-    right:0;
-    background: white;
-    padding:5px 10px;
-    border-radius: 15px;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap:5px;
-    min-width: 120px;
-    z-index:1100;
-    border: none;
-    outline: none;
-    
-  }
+
+.modal-menu button{
+  border: none;
+  outline: none;
+  background: none;
+}
+.modal-menu button:hover{
+ background-color: rgb(235,235,235);
   
-
-  .modal-menu button{
-    border: none;
-    outline: none;
-    background: none;
-  }
-  .modal-menu button:hover{
-   background-color: rgb(235,235,235);
-    
-  }
-
-  
-  
-  .close-button {
-    position: absolute;
-    bottom: -2px;
-    right: 0px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-  } 
+}
 
 
-  .edit{
-    display: flex;
-    flex-direction: column;
-    padding:5px;
-    gap:10px;
-    background: none;
-  }
 
-  .delete-image{
-    position: absolute;
-    top:7px;
-    right:5px;
-    background:none ;
-    border:none;
-    cursor: pointer;
-    font-size: 18px;
-    color:rgb(255,77,77);
+.close-button {
+  position: absolute;
+  bottom: -2px;
+  right: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+} 
 
-  }
 
-  .edit-note-container{
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-    padding: 15px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-    width: 100%;
-  }
+.edit{
+  display: flex;
+  flex-direction: column;
+  padding:5px;
+  gap:10px;
+  background: none;
+}
 
-  .edit-note-title{
-    font-size: 18px;
-    font-weight: bold;
-    border:none;
-    outline: none;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
+.delete-image{
+  position: absolute;
+  top:7px;
+  right:5px;
+  background:none ;
+  border:none;
+  cursor: pointer;
+  font-size: 18px;
+  color:rgb(255,77,77);
 
-  .edit-note-content{
-    min-height:80px;
-    border:none;
-    outline: none;
-    padding:10px;
-    font-size: 16px;
-    resize: none;
-  }
+}
 
-  .edit-note-actions{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.edit-note-container{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  width: 100%;
+}
 
-  .save-button{
-    background-color: #4285f4;
-    color:white;
-    border: none;
-    padding: 8px 15px;
-    border-radius:15px;
-    cursor: pointer;
-    /* font-weight: bold; */
-  }
+.edit-note-title{
+  font-size: 18px;
+  font-weight: bold;
+  border:none;
+  outline: none;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.edit-note-content{
+  min-height:80px;
+  border:none;
+  outline: none;
+  padding:10px;
+  font-size: 16px;
+  resize: none;
+}
+
+.edit-note-actions{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.save-button{
+  background-color: #4285f4;
+  color:white;
+  border: none;
+  padding: 8px 15px;
+  border-radius:15px;
+  cursor: pointer;
+  /* font-weight: bold; */
+}

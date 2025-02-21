@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
-import Header from "./components/Header/Header";
-import CreateNote from "./components/Createnote/Createnote";
-import NoteList from "./components/NoteList/NoteList";
-import Sidebar from "./components/Sidebar/Sidebar";
-import { Routes, Route, useLocation } from "react-router-dom";
+import Header from "./Components/Header/Header";
+import CreateNote from "./Components/Createnote/Createnote";
+import NoteList from "./Components/NoteList/NoteList";
+import Sidebar from "./Components/Sidebar/Sidebar";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Reminder from "./Pages/Reminder/Reminder";
-import EditLabel from "./Pages/EditLabels/EditLabel";
+import EditLabel from "./Pages/EditLabels/EditLabels";
 import Archive from "./Pages/Archive/Archive";
 import Trash from "./Pages/Trash/Trash";
+import LabelNotes from "./Pages/LabelNotes/Labelnotes";
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [trashedNotes,setTrashNotes]=useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const [labels,setLabels]=useState([]);
+  const[isModalOpen,setIsModalOpen]=useState(false);
+  const navigate=useNavigate();
   const location = useLocation();
 
   const addNote = (newNote) => {
@@ -38,6 +41,10 @@ function App() {
       return prevNotes.filter((note) => 
         note.id !== id);
       });
+      // Redirect to home if the delete note was open
+      if (location.pathname=== `/note/${id}`){
+        navigate('/')
+      }
     };
 
     // Move note to trash
@@ -99,7 +106,8 @@ function App() {
   // separte pin and unpin notes
   const pinnedNotes = filteredNotes.filter((note) => note.isPinned);
   const unpinnedNotes = filteredNotes.filter((note) => !note.isPinned);
-  console.log(notes);
+  console.log('notes',notes);
+  console.log('trashnednotes',trashedNotes);
 
   // Determine if we're in Trash  or Archive
   const isTrash=location.pathname ==='/Trash';
@@ -107,12 +115,35 @@ function App() {
   // const isReminder=location.pathname ==='/Reminder';
   const isHome=location.pathname ==='/';
 
+  // add a label
+  const addLabel=(newLabel)=>{
+    if (newLabel.trim() && !labels.includes(newLabel)){
+      setLabels((prevLabels)=>[...prevLabels,newLabel])
+    }
+  }
+
+  // delete a label
+  const deleteLabel=(labelToDelete)=>{
+    setLabels((prevLabels)=> prevLabels.filter((label)=>label !==labelToDelete))
+  }
+
+  // open modal
+  const openModal=()=>{
+    setIsModalOpen(true)
+  }
+
+  // close modal
+  const closeModal=()=>{
+    setIsModalOpen(false);
+    navigate('/')
+  }
+  
 
   return (
     <div className="App">
       <Header setSearchQuery={setSearchQuery} />
       <div className="main-content">
-        <Sidebar />
+        <Sidebar labels={labels} openModal={openModal}/>
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -122,7 +153,7 @@ function App() {
               <Reminder />
               </>}
                />
-            <Route path="/EditLabel" element={<EditLabel />} />
+            
             <Route path="/Archive" element={<Archive />} />
             <Route path="/Trash" element={
               <Trash
@@ -131,14 +162,22 @@ function App() {
                permanentDeleteNote={permanentDeleteNote}
                />} />
             <Route path='/note/:id' element={<NoteList notes={notes} editNote={editNote}/>}/>
+            <Route path='/label/:labelName' element={<LabelNotes notes={notes}/>}/>
           </Routes>
+
+          {/* editlabel modal */}
+          {isModalOpen &&(
+            <EditLabel
+            labels={labels}
+            addLabel={addLabel}
+            deleteLabel={deleteLabel}
+            closeModal={closeModal}/>
+          )}
 
           {/* {show create note only for Home and Reminder path } */}
           {isHome && <CreateNote addNote={addNote}/>}
 
-          {/* {Show Reminder paragraph below CreateNote}
-          {isReminder && <Reminder/>} */}
-          
+        
           {/* {show notes  only on home} */}
           {isHome &&(
              <>

@@ -10,7 +10,7 @@ const NoteList = ({ notes, deleteNote, pinNote, copyNote, editNote }) => {
   return (
     <div className="note-list">
       {notes.map((note) => (
-        <div key={note.id} onCLick={() => navigate(`/note/${note.id}`)}>
+        <div key={note.id} onClick={() => navigate(`/note/${note.id}`)}>
           <Note
             key={note.id}
             id={note.id}

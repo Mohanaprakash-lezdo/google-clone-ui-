@@ -1,10 +1,12 @@
 import React from 'react'
-
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import './Trash.css'
 const Trash = ({trashedNotes,restoreNote,permanentDeleteNote}) => {
   return (
     <div className='trash-container'>
       <h2>Trash</h2>
-      <h3>hi</h3>
+      {/* <h3>hi</h3> */}
       {trashedNotes.length===0?(
         <p>No Notes in Trash</p>
 
@@ -16,8 +18,12 @@ const Trash = ({trashedNotes,restoreNote,permanentDeleteNote}) => {
             <p>{note.content}</p>
             {note.image && <img src={note.image} alt='note'/>}
             <div className='trash-actions'>
-              <button onClick={()=>restoreNote(note.id)}>Restore</button>
-              <button onClick={()=>permanentDeleteNote(note.id)}>Delete Forever</button>
+              <button onClick={()=>restoreNote(note.id)}>
+                <RestoreFromTrashIcon/>
+              </button>
+              <button onClick={()=>permanentDeleteNote(note.id)}>
+                <DeleteForeverIcon/>
+              </button>
             </div>
           </div>
         ))

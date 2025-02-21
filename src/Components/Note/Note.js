@@ -44,7 +44,8 @@ const Note = (props) => {
   // delete notes
   const handleDelete = () => {
     deleteNote(id);
-    setShowMenu(false);
+    setShowMenu(false)
+    navigate('/');
   };
 
   const handleDeleteImage = () => {

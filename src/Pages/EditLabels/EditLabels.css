@@ -1,0 +1,27 @@
+.modal-content{
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+    gap:15px;
+    position: relative;
+}
+
+
+
+.add-button {
+    position: relative;
+    top:7px;
+    right: -10px;
+    background: none;
+    border: none;
+}
+
+.delete-button{
+    position: relative;
+    right:-9px;
+    bottom: -5px;
+}
+
+ul{
+    list-style: none;
+}
