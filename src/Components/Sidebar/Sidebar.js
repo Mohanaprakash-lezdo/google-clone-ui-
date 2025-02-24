@@ -7,10 +7,10 @@ const Sidebar = ({labels,openModal}) => {
     <div className='sidebar'>
         <ul>
           <li>
-          <NavLink to='/' className={({isActive})=>(isActive?'active':'')}>Notes</NavLink>
+          <NavLink to='/'  end className={({isActive})=>(isActive?'active sidebar-link':'sidebar-link')}>Notes</NavLink>
           </li>
           <li>
-          <NavLink to='/Reminder' className={({isActive})=>(isActive?'active':'')}>Reminders</NavLink>
+          <NavLink to='/Reminder' className={({isActive})=>(isActive?'active sidebar-link':'sidebar-link')}>Reminders</NavLink>
           </li>
           {labels && labels.length>0 &&(
             <div className='sidebar-labels'>
@@ -20,7 +20,7 @@ const Sidebar = ({labels,openModal}) => {
                 key={label}
                 className='label-item'>
                   <NavLink to={`/label/${label}`}
-                  className={({isActive})=>(isActive?'active':'')}
+                  className={({isActive})=>(isActive?'active sidebar-link':'sidebar-link')}
                   aria-label={`view notes  for ${label}`}>
                      {label}
                   </NavLink>    
@@ -33,10 +33,10 @@ const Sidebar = ({labels,openModal}) => {
           Edit Labels
           </li>
           <li>
-          <NavLink to='/Archive' className={({isActive})=>(isActive?'active':'')}>Archive</NavLink>
+          <NavLink to='/Archive' className={({isActive})=>(isActive?'active sidebar-link':'sidebar-link')}>Archive</NavLink>
           </li>
           <li>
-          <NavLink to='/Trash' className={({isActive})=>(isActive?'active':'')}>Trash</NavLink>
+          <NavLink to='/Trash' className={({isActive})=>(isActive?'active sidebar-link':'sidebar-link')}>Trash</NavLink>
           </li>
           {/* {Dynamic Labels Section} */}
          

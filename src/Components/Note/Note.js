@@ -43,7 +43,12 @@ const Note = (props) => {
 
   // delete notes
   const handleDelete = () => {
-    deleteNote(id);
+    if(props.labelName){
+      deleteNote(id,props.labelName);
+    }else{
+      deleteNote(id)
+    }
+
     setShowMenu(false)
     navigate('/');
   };

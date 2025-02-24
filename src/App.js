@@ -4,7 +4,8 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import CreateNote from "./Components/Createnote/Createnote";
 import NoteList from "./Components/NoteList/NoteList";
-import Sidebar from "./Components/Sidebar/Sidebar";
+// import Sidebar from "./Components/Sidebar/Sidebar";
+import Layout from "./Components/Layout/Layout";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home/Home";
 import Reminder from "./Pages/Reminder/Reminder";
@@ -12,6 +13,7 @@ import EditLabel from "./Pages/EditLabels/EditLabels";
 import Archive from "./Pages/Archive/Archive";
 import Trash from "./Pages/Trash/Trash";
 import LabelNotes from "./Pages/LabelNotes/Labelnotes";
+// import { LabelSharp } from "@mui/icons-material";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -22,24 +24,45 @@ function App() {
   const navigate=useNavigate();
   const location = useLocation();
 
-  const addNote = (newNote) => {
-    setNotes((prevNotes) => {
-      return [
-        ...prevNotes,
-        { ...newNote, ispinned: false, id: uuidv4(), lastedited: null },
-      ];
+  const addNote = (newNote,isGlobal=true) => {
+    setNotes((prevNotes) => 
+        [...prevNotes,
+          {
+            ...newNote,
+             ispinned: false, 
+             id: uuidv4(),
+            lastedited: null,
+            isGlobal
+          }
+          ,
+        ]);
+      }
+     
+      
       // generating a unique id
-    });
-  };
+    
+  ;
   // move note to trash
-  const deleteNote = (id) => {
+  const deleteNote = (id,labelName=null) => {
     setNotes((prevNotes) => {
       const noteToTrash=prevNotes.find((note)=>note.id ===id);
       if (noteToTrash){
-        setTrashNotes((prevTrashedNotes)=>[...prevTrashedNotes,noteToTrash]);
+        if (labelName && noteToTrash.labels.length>1){
+          // Remove the label insteadt of deleting  the note
+          const updatedNote={
+            ...noteToTrash,
+            labels:noteToTrash.labels.filter((label)=>label !==labelName)
+          }
+          return prevNotes.map((note)=>
+          note.id===id?updatedNote:note)
+        }else{
+          setTrashNotes((prevTrashedNotes)=>[...prevTrashedNotes,noteToTrash])
+          return prevNotes.filter((note) => 
+            note.id !== id);;
+        }
       }
-      return prevNotes.filter((note) => 
-        note.id !== id);
+      return prevNotes;
+
       });
       // Redirect to home if the delete note was open
       if (location.pathname=== `/note/${id}`){
@@ -52,7 +75,26 @@ function App() {
       setTrashNotes((prevTrashedNotes)=>{
         const noteToRestore=prevTrashedNotes.find((note)=>note.id===id);
         if (noteToRestore){
-          setNotes((prevNotes)=>[...prevNotes,noteToRestore])
+          // check if  all labels on the  note exist  in the label state
+          const noteLabels=Array.isArray(noteToRestore.labels)?noteToRestore.labels:  [];
+          const missinglabels=noteLabels.filter(label=>!labels.includes(label));
+          if (missinglabels.length>0){
+            const userChoice=window.confirm(
+              `this note labels had that no longer exist: ${missinglabels.join(',')}.\nDo you want to restore it on home page?`
+            )
+           if (!userChoice){
+            return prevTrashedNotes
+           }
+          }
+
+          const updatedNote={
+            ...noteToRestore,
+            labels:noteLabels.filter(label=>labels.includes(label)) || [],
+            isGlobal:true 
+
+          }
+          setNotes((prevNotes)=>[...prevNotes,updatedNote])
+          navigate('/')
         }
         return prevTrashedNotes.filter((note)=>note.id !==id);
       })
@@ -99,9 +141,12 @@ function App() {
 
   // note search filter
   const filteredNotes = notes.filter(
-    (note) =>
+    (note) =>note.isGlobal &&(
       note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       note.content.toLowerCase().includes(searchQuery.toLowerCase())
+
+    )
+     
   );
   // separte pin and unpin notes
   const pinnedNotes = filteredNotes.filter((note) => note.isPinned);
@@ -143,7 +188,8 @@ function App() {
     <div className="App">
       <Header setSearchQuery={setSearchQuery} />
       <div className="main-content">
-        <Sidebar labels={labels} openModal={openModal}/>
+
+        <Layout labels={labels} openModal={openModal}/>
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -162,7 +208,13 @@ function App() {
                permanentDeleteNote={permanentDeleteNote}
                />} />
             <Route path='/note/:id' element={<NoteList notes={notes} editNote={editNote}/>}/>
-            <Route path='/label/:labelName' element={<LabelNotes notes={notes}/>}/>
+            <Route path='/label/:labelName' element={
+              <LabelNotes notes={notes} 
+              addNote={addNote}
+              deleteNote={deleteNote}
+              editNote={editNote}
+              pinNote={pinNote}
+              copyNote={copyNote}/>}/>
           </Routes>
 
           {/* editlabel modal */}

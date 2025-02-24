@@ -8,12 +8,13 @@ import "./Createnote.css";
 // import { Icon } from "@mui/material";
 
 // expand fn
-const Createnote = (props) => { 
+const Createnote = ({addNote,labelName}) => { 
   const [isexpanded, setisExpanded] = useState(false);
   const [note, setNote] = useState({
     title: "",
     content: "",
     image:'',
+    labels:labelName? [labelName]:[]
   });
 
   // updated code
@@ -53,11 +54,13 @@ const Createnote = (props) => {
   }
   const submitNote=(event)=>{
     event.preventDefault();
-    props.addNote(note);
+    if (note.title.trim() || note.content.trim() || note.image)
+    addNote(note);
     setNote({
       title:'',
       content:'',
       image:'', 
+      labels:labelName ? [labelName]:[]
     })
     setisExpanded(false)
   }
